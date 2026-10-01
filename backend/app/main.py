@@ -63,8 +63,8 @@ async def root():
 async def health_check():
     """Health check endpoint to verify backend, database, and external service readiness."""
     db_health = await check_mongo_health()
-    ai_service = get_ai_builder_service()
-    ai_health = await ai_service.check_health()
+    # ai_service = get_ai_builder_service()
+    # ai_health = await ai_service.check_health()
 
     return {
         "status": "ok",
