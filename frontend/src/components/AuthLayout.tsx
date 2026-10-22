@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import RingHero from "./RingHero";
 
 type AuthMode = "signup" | "login";
 
@@ -10,6 +11,15 @@ export default function AuthLayout() {
 
   return (
     <main className={`signup-page auth-mode-${mode}`}>
+      <div className="guide-lines" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="ghost-wordmark" aria-hidden="true">
+        VELVET INVITE
+      </div>
       <div className="auth-orb auth-orb-one" aria-hidden="true" />
       <div className="auth-orb auth-orb-two" aria-hidden="true" />
       <div className={`auth-shell auth-shell-${mode}`}>
@@ -31,6 +41,7 @@ export default function AuthLayout() {
         </div>
 
         <section className="auth-velvet-panel" aria-label="Velvet Invite">
+          <RingHero size="auth" className="auth-ring-hero" />
           <div
             className="auth-velvet-copy auth-velvet-copy-signup"
             aria-hidden={mode !== "signup"}

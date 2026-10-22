@@ -1,0 +1,2069 @@
+/* ==========================================================================
+   Wedding Templates Page Styles
+   Matches the Sylva / Forest palette and tokens from index.css
+   ========================================================================== */
+
+.templates-page {
+  min-height: 100vh;
+  /* Matches website ground color from index.css (--forest-dark / --forest) */
+  background:
+    radial-gradient(64% 52% at 27% 84%, rgba(232, 238, 222, 0.085) 0%, rgba(232, 238, 222, 0) 72%),
+    radial-gradient(70% 60% at 92% 8%, rgba(24, 28, 20, 0.10) 0%, rgba(24, 28, 20, 0) 68%),
+    var(--forest-dark, #383b34);
+  color: var(--ink, #ffffff);
+  font-family: var(--font-sans, "Lexend", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 120px;
+}
+
+/* Floor ambient light matching index.css .sylva-floor-light */
+.templates-floor-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 520px;
+  background:
+    radial-gradient(72% 44% at 50% 0%, rgba(238, 243, 231, 0.12) 0%, rgba(238, 243, 231, 0.05) 42%, rgba(238, 243, 231, 0) 88%),
+    linear-gradient(180deg, rgba(238, 243, 231, 0.04) 0%, rgba(238, 243, 231, 0) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Faint vertical guide lines matching landing page */
+.templates-guides {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.templates-guide-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--rule, rgba(255, 255, 255, 0.055)) 12%, var(--rule, rgba(255, 255, 255, 0.055)) 82%, rgba(255, 255, 255, 0) 100%);
+}
+
+/* Header bar matching website glass-dock styling */
+.templates-header-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0) 42%),
+    rgba(34, 40, 31, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(10, 14, 8, 0.3);
+  padding: 12px 32px;
+}
+
+.templates-header-content {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.templates-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.templates-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink-soft, rgba(255, 255, 255, 0.62));
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.2s ease;
+}
+
+.templates-back-link:hover {
+  color: var(--ink, #ffffff);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.templates-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.templates-nav-link {
+  color: var(--ink-soft, rgba(255, 255, 255, 0.62));
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.templates-nav-link:hover {
+  color: var(--ink, #ffffff);
+}
+
+.templates-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card, #f2f3ef);
+  color: var(--card-ink, #23261f);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 8px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(10, 14, 8, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.templates-cta-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(10, 14, 8, 0.35);
+}
+
+/* Hero Title section */
+.templates-hero {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 48px 32px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.templates-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent, #a7aa8e);
+  margin-bottom: 10px;
+}
+
+.templates-title {
+  font-size: clamp(36px, 4.2vw, 52px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink, #ffffff);
+  margin: 0 0 10px 0;
+  line-height: 1.1;
+}
+
+.templates-subtitle {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-soft, rgba(255, 255, 255, 0.62));
+  margin: 0;
+  max-width: 680px;
+}
+
+/* 4 Wedding Category Hero Cards (Primary category pills) */
+.wedding-category-pills-row {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px 32px 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 960px) {
+  .wedding-category-pills-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .wedding-category-pills-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wedding-category-card-btn {
+  background: rgba(30, 35, 27, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 14px 18px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wedding-category-card-btn:hover {
+  background: rgba(36, 42, 32, 0.85);
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
+}
+
+.wedding-category-card-btn.is-active {
+  background: var(--card, #f2f3ef);
+  border-color: var(--card, #f2f3ef);
+  color: var(--card-ink, #23261f);
+  box-shadow: 0 8px 24px rgba(10, 14, 8, 0.35);
+}
+
+.wedding-category-card-btn.is-active .cat-title,
+.wedding-category-card-btn.is-active .cat-desc {
+  color: var(--card-ink, #23261f);
+}
+
+.wedding-category-card-btn.is-active .cat-desc {
+  opacity: 0.75;
+}
+
+.cat-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink, #ffffff);
+  letter-spacing: -0.01em;
+}
+
+.cat-desc {
+  font-size: 11px;
+  color: var(--ink-faint, rgba(255, 255, 255, 0.44));
+}
+
+/* Categories Taxonomy Columns */
+.templates-categories-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 12px 32px 32px;
+}
+
+.wedding-taxonomy-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  background: rgba(30, 35, 27, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+@media (max-width: 900px) {
+  .wedding-taxonomy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .wedding-taxonomy-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.taxonomy-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.taxonomy-column-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.taxonomy-column-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink, #ffffff);
+  letter-spacing: 0.02em;
+}
+
+.taxonomy-item-btn {
+  background: none;
+  border: none;
+  padding: 2px 0;
+  text-align: left;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink-faint, rgba(255, 255, 255, 0.5));
+  cursor: pointer;
+  transition: color 0.18s ease, transform 0.18s ease;
+  font-family: inherit;
+}
+
+.taxonomy-item-btn:hover {
+  color: var(--ink, #ffffff);
+  transform: translateX(2px);
+}
+
+.taxonomy-item-btn.is-selected {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Controls Bar (Filter, Sort, Search) */
+.templates-controls-bar {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.templates-controls-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Segmented Tabs using Website Glass styling */
+.segmented-tabs {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(30, 35, 27, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 4px;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.segmented-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--ink-faint, rgba(255, 255, 255, 0.5));
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.segmented-tab-btn:hover {
+  color: var(--ink, #ffffff);
+}
+
+.segmented-tab-btn.is-active {
+  background: var(--card, #f2f3ef);
+  color: var(--card-ink, #23261f);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(10, 14, 8, 0.25);
+}
+
+.active-filter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--ink, #ffffff);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.active-filter-badge button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.active-filter-badge button:hover {
+  color: #ffffff;
+}
+
+.templates-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-dropdown-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(30, 35, 27, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--ink, #ffffff);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 15px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  position: relative;
+}
+
+.filter-dropdown-btn:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(36, 42, 32, 0.85);
+}
+
+.filter-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: #272d24;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 6px;
+  min-width: 170px;
+  box-shadow: 0 14px 34px rgba(10, 14, 8, 0.5);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.filter-menu-item {
+  background: none;
+  border: none;
+  color: var(--ink-soft, rgba(255, 255, 255, 0.65));
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-menu-item:hover,
+.filter-menu-item.is-selected {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.search-input-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(30, 35, 27, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 6px 14px;
+  transition: border-color 0.2s ease;
+}
+
+.search-input-wrapper:focus-within {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.search-input-wrapper input {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 12px;
+  outline: none;
+  width: 140px;
+  font-family: inherit;
+}
+
+.search-input-wrapper input::placeholder {
+  color: var(--ink-faint, rgba(255, 255, 255, 0.44));
+}
+
+/* Templates Grid */
+.templates-grid-section {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 22px;
+}
+
+@media (max-width: 1240px) {
+  .templates-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .templates-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .templates-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Template Card */
+.template-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 16px;
+  transition: transform 0.22s ease;
+}
+
+.template-card:hover {
+  transform: translateY(-4px);
+}
+
+.template-thumbnail-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10.5;
+  background: #252b21;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 24px rgba(10, 14, 8, 0.35);
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.template-card:hover .template-thumbnail-frame {
+  border-color: rgba(255, 255, 255, 0.26);
+  box-shadow: 0 16px 36px rgba(10, 14, 8, 0.45);
+}
+
+.template-visual {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Hover Overlay */
+.template-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 36, 27, 0.72);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.template-card:hover .template-hover-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.template-overlay-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  border: none;
+}
+
+.template-overlay-btn.primary {
+  background: var(--card, #f2f3ef);
+  color: var(--card-ink, #23261f);
+}
+
+.template-overlay-btn.primary:hover {
+  background: #ffffff;
+  transform: scale(1.03);
+}
+
+.template-overlay-btn.secondary {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.template-overlay-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: scale(1.03);
+}
+
+/* Template Card Meta Row */
+.template-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+
+.template-meta-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.template-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink, #ffffff);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+
+.template-author {
+  font-size: 11.5px;
+  color: var(--accent, #a7aa8e);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.template-price-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(30, 35, 27, 0.85);
+  color: var(--card, #f2f3ef);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
+.template-price-badge.free {
+  color: var(--ink-soft, rgba(255, 255, 255, 0.7));
+}
+
+/* Empty search state */
+.templates-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 72px 24px;
+  background: rgba(30, 35, 27, 0.5);
+  border-radius: 20px;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.templates-empty-state h3 {
+  font-size: 18px;
+  color: var(--ink, #ffffff);
+  margin: 0 0 8px 0;
+}
+
+.templates-empty-state p {
+  font-size: 13.5px;
+  color: var(--ink-faint, rgba(255, 255, 255, 0.5));
+  margin: 0 0 20px 0;
+}
+
+/* ==========================================================================
+   Wedding Visual Preview Designs (Custom Curated Wedding Layouts)
+   ========================================================================== */
+
+/* 1. Classic & elegant: Charlotte & Edward */
+.wvisual-classic-manor {
+  background: #fbfbf7;
+  color: #23261f;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+.classic-manor-header {
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7c8177;
+  text-align: center;
+}
+.classic-manor-body {
+  text-align: center;
+  margin: auto 0;
+}
+.classic-manor-names {
+  font-size: 17px;
+  font-family: Georgia, serif;
+  letter-spacing: 0.05em;
+  color: #1a1c17;
+  font-weight: 400;
+}
+.classic-manor-details {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8c7853;
+  margin-top: 4px;
+}
+.classic-manor-seal {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #967d58;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* 2. Romantic & floral: Sophia & Mateo */
+.wvisual-romantic-tuscany {
+  background: radial-gradient(circle at 60% 30%, #57463a 0%, #291e17 100%);
+  color: #f7ede2;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.romantic-photo-strip {
+  width: 100%;
+  height: 75px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+.romantic-photo-strip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.romantic-names {
+  font-size: 16px;
+  font-family: serif;
+  font-style: italic;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 8px;
+}
+.romantic-date {
+  font-size: 8px;
+  color: #d6b896;
+  text-align: center;
+  letter-spacing: 0.06em;
+}
+
+/* 3. Modern & minimal: Chloe & Samuel */
+.wvisual-modern-noir {
+  background: #191c17;
+  color: #ffffff;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+}
+.modern-noir-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.modern-noir-tag {
+  font-size: 7.5px;
+  color: var(--accent, #a7aa8e);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.modern-noir-names {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 4px 0;
+  line-height: 1.2;
+}
+.modern-noir-venue {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.55);
+}
+.modern-noir-img {
+  width: 100%;
+  height: 85px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.modern-noir-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(80%) contrast(110%);
+}
+
+/* 4. Traditional & cultural: Priya & Dev (South Asian) */
+.wvisual-cultural-desi {
+  background: linear-gradient(135deg, #782029 0%, #3a0d13 100%);
+  color: #ffd88a;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 216, 138, 0.2);
+}
+.cultural-gold-arch {
+  border: 1px solid rgba(255, 216, 138, 0.35);
+  border-radius: 40px 40px 6px 6px;
+  padding: 10px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.cultural-arch-eyebrow {
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ffd88a;
+}
+.cultural-arch-title {
+  font-size: 15px;
+  font-family: serif;
+  font-weight: 700;
+  color: #fff7e6;
+  margin: auto 0;
+}
+.cultural-arch-tagline {
+  font-size: 7.5px;
+  color: rgba(255, 240, 200, 0.7);
+  letter-spacing: 0.08em;
+}
+
+/* 5. Classic & elegant: Victoria & Arthur */
+.wvisual-classic-estate {
+  background: #ffffff;
+  color: #23261f;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.classic-estate-border {
+  border: 1px solid #c9b084;
+  height: 100%;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.classic-estate-monogram {
+  font-size: 18px;
+  font-family: serif;
+  color: #9c7b45;
+  font-style: italic;
+}
+.classic-estate-names {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+}
+.classic-estate-loc {
+  font-size: 8px;
+  color: #666;
+}
+
+/* 6. Romantic & floral: Isabella & Lucas */
+.wvisual-romantic-meadow {
+  background: #f7f9f3;
+  color: #2b3a29;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 12px;
+}
+.romantic-meadow-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85);
+}
+.romantic-meadow-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+.romantic-meadow-names {
+  font-size: 13px;
+  font-family: serif;
+  font-style: italic;
+  color: #283625;
+  font-weight: 600;
+}
+.romantic-meadow-date {
+  font-size: 8px;
+  color: #60745b;
+}
+
+/* 7. Modern & minimal: Maya & Julian */
+.wvisual-modern-loft {
+  background: #2b3027;
+  color: #ffffff;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.modern-loft-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 7.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent, #a7aa8e);
+}
+.modern-loft-headline {
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: auto 0;
+}
+.modern-loft-headline strong {
+  font-weight: 700;
+}
+.modern-loft-bottom {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 8. Traditional & cultural: Amara & Kemi (African Royal) */
+.wvisual-cultural-alafia {
+  background: linear-gradient(135deg, #2b1f14 0%, #150f0a 100%);
+  color: #e5b357;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(229, 179, 87, 0.25);
+}
+.alafia-badge {
+  font-size: 7.5px;
+  letter-spacing: 0.15em;
+  color: #e5b357;
+  text-transform: uppercase;
+}
+.alafia-couple {
+  font-size: 16px;
+  font-family: serif;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin: auto 0;
+}
+.alafia-subtitle {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.65);
+  text-align: center;
+}
+
+/* 9. Classic & elegant: Elena & Julian */
+.wvisual-classic-ballroom {
+  background: #1c211a;
+  color: #f2f3ef;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.classic-ballroom-photo {
+  width: 100%;
+  height: 70px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.classic-ballroom-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(105%);
+}
+.classic-ballroom-names {
+  font-size: 14px;
+  font-family: Georgia, serif;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 6px;
+}
+.classic-ballroom-sub {
+  font-size: 7.5px;
+  color: var(--accent, #a7aa8e);
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* 10. Romantic & floral: Camila & Diego */
+.wvisual-romantic-vineyard {
+  background: #38312b;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 14px;
+}
+.romantic-vineyard-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65);
+}
+.romantic-vineyard-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.romantic-vineyard-names {
+  font-size: 16px;
+  font-family: serif;
+  color: #ffffff;
+  font-style: italic;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+.romantic-vineyard-date {
+  font-size: 8px;
+  color: #ffd8a8;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+/* 11. Modern & minimal: Zoe & Alexander */
+.wvisual-modern-arch {
+  background: #fbfbf8;
+  color: #23261f;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.modern-arch-header {
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #888;
+}
+.modern-arch-body {
+  margin: auto 0;
+}
+.modern-arch-names {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #1a1a1a;
+}
+.modern-arch-footer {
+  font-size: 8px;
+  color: #777;
+}
+
+/* 12. Traditional & cultural: Hana & Kenji (East Asian) */
+.wvisual-cultural-kyoto {
+  background: linear-gradient(135deg, #1f2723 0%, #101513 100%);
+  color: #e8d0a9;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(232, 208, 169, 0.2);
+}
+.kyoto-crest {
+  font-size: 16px;
+  color: #d8b788;
+  text-align: center;
+}
+.kyoto-names {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: 0.08em;
+  margin: auto 0;
+}
+.kyoto-sub {
+  font-size: 7.5px;
+  color: #d8b788;
+  text-align: center;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* 13. Classic & elegant: Grace & William */
+.wvisual-classic-kensington {
+  background: #f4efe6;
+  color: #2e3028;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.kensington-border {
+  border: 1px double #9e8d74;
+  height: 100%;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.kensington-title {
+  font-size: 14px;
+  font-family: serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.kensington-sub {
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: #7a6e5b;
+}
+
+/* 14. Romantic & floral: Sienna & Liam */
+.wvisual-romantic-sunset {
+  background: linear-gradient(180deg, #593d32 0%, #2b1f1a 100%);
+  color: #fff;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sunset-tag {
+  font-size: 7.5px;
+  color: #f7ba9e;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.sunset-names {
+  font-size: 16px;
+  font-family: serif;
+  font-style: italic;
+  text-align: center;
+  margin: auto 0;
+}
+.sunset-date {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+/* 15. Modern & minimal: Nadia & Samir */
+.wvisual-modern-desert {
+  background: #363a31;
+  color: #f2f3ef;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.desert-chic-badge {
+  font-size: 8px;
+  color: var(--accent, #a7aa8e);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.desert-chic-names {
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin: auto 0;
+}
+.desert-chic-loc {
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 16. Traditional & cultural: Aaliyah & Tariq */
+.wvisual-cultural-zahra {
+  background: linear-gradient(135deg, #1d2c2b 0%, #0c1514 100%);
+  color: #d1b476;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(209, 180, 118, 0.22);
+}
+.zahra-motif {
+  font-size: 12px;
+  text-align: center;
+  color: #d1b476;
+}
+.zahra-names {
+  font-size: 15px;
+  font-family: serif;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  margin: auto 0;
+}
+.zahra-sub {
+  font-size: 7.5px;
+  color: #d1b476;
+  text-align: center;
+  letter-spacing: 0.08em;
+}
+
+/* ==========================================================================
+   Template Modal Preview (Wedding-specific)
+   ========================================================================== */
+
+.template-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 22, 16, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.2s ease forwards;
+}
+
+.template-modal-card {
+  background: #252b21;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 22px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(10, 14, 8, 0.6);
+  display: flex;
+  flex-direction: column;
+}
+
+.template-modal-header {
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.template-modal-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-preview-stage {
+  width: 100%;
+  height: 360px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 30px rgba(10, 14, 8, 0.4);
+}
+
+.modal-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.modal-info-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 580px;
+}
+
+.modal-author-tag {
+  font-size: 12.5px;
+  color: var(--accent, #a7aa8e);
+}
+
+.modal-desc {
+  font-size: 14px;
+  color: var(--ink-soft, rgba(255, 255, 255, 0.7));
+  line-height: 1.5;
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-action-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card, #f2f3ef);
+  color: var(--card-ink, #23261f);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(10, 14, 8, 0.25);
+  transition: all 0.2s ease;
+}
+
+.modal-action-primary:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(10, 14, 8, 0.35);
+}
+
+.modal-action-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-action-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================================================
+   New Wedding Templates Visuals (from latest reference screenshot)
+   ========================================================================== */
+
+/* 1. Wedded (Sophie & Matteo 3-panel mockup) */
+.wvisual-wedded {
+  background: #f8f6f0;
+  color: #2b2b2b;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  overflow: hidden;
+}
+.wedded-panel {
+  flex: 1;
+  height: 94%;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.wedded-panel-img {
+  width: 100%;
+  height: 44px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+.wedded-panel-title {
+  font-size: 7px;
+  font-family: serif;
+  font-weight: 700;
+  text-align: center;
+  color: #1a1a1a;
+  margin: 3px 0;
+}
+.wedded-panel-sub {
+  font-size: 5.5px;
+  color: #888;
+  text-align: center;
+}
+
+/* 2. New Chapter (Ellis & Jules laptop mockup) */
+.wvisual-newchapter {
+  background: #18191c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+.newchapter-laptop {
+  width: 90%;
+  height: 85%;
+  background: #2b2c30;
+  border-radius: 8px 8px 2px 2px;
+  border: 2px solid #3c3d44;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+.newchapter-screen {
+  flex: 1;
+  background: #f2ede4;
+  color: #1a1a1a;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  align-items: center;
+}
+.newchapter-left-text {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.newchapter-date {
+  font-size: 6px;
+  color: #666;
+  margin-top: 3px;
+}
+.newchapter-photo {
+  width: 100%;
+  height: 60px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+.newchapter-base {
+  height: 4px;
+  background: #4a4b52;
+  border-radius: 0 0 6px 6px;
+}
+
+/* 3. Weddingly (Olivia & Daniel with white frame) */
+.wvisual-weddingly {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a2a36;
+}
+.weddingly-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(105%);
+}
+.weddingly-frame {
+  position: relative;
+  z-index: 2;
+  width: 88%;
+  height: 82%;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.weddingly-eyebrow {
+  font-size: 7px;
+  color: rgba(255, 255, 255, 0.85);
+  font-style: italic;
+}
+.weddingly-names {
+  font-size: 16px;
+  font-family: serif;
+  color: #ffffff;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+.weddingly-date {
+  font-size: 6.5px;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.08em;
+}
+
+/* 4. Sanctun (Emma & James B&W editorial) */
+.wvisual-sanctun {
+  position: relative;
+  overflow: hidden;
+  background: #0f0f10;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+}
+.sanctun-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(125%) brightness(0.8);
+}
+.sanctun-names {
+  position: relative;
+  z-index: 2;
+  font-size: 17px;
+  font-family: serif;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* 5. Wedding Day Site (RabenRifaie taupe/chocolate) */
+.wvisual-weddingdaysite {
+  background: #47382e;
+  color: #f7ede2;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.wds-header {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #d1b49d;
+}
+.wds-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+  margin: auto 0;
+}
+.wds-img-1 {
+  width: 100%;
+  height: 65px;
+  border-radius: 4px;
+  object-fit: cover;
+  filter: grayscale(80%);
+}
+.wds-img-2 {
+  width: 100%;
+  height: 65px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+/* 6. Maison Véra (Studio pepette palace & cake) */
+.wvisual-maisonvera {
+  background: #ebe6df;
+  color: #2b2723;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 8px;
+  align-items: center;
+}
+.maisonvera-text h4 {
+  font-size: 10px;
+  font-family: serif;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #211c18;
+  margin: 0 0 4px 0;
+}
+.maisonvera-text p {
+  font-size: 6.5px;
+  color: #6e645a;
+  margin: 0;
+}
+.maisonvera-img-box {
+  width: 100%;
+  height: 80px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.maisonvera-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 7. Elowen Chetan (Vintage postcard arch) */
+.wvisual-elowenchetan {
+  background: #eadecc;
+  color: #3b2f27;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.elowen-arch-frame {
+  width: 100px;
+  height: 62px;
+  border: 1px solid #997c67;
+  border-radius: 40px 40px 4px 4px;
+  padding: 3px;
+  margin: 2px auto;
+  overflow: hidden;
+}
+.elowen-arch-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 36px 36px 2px 2px;
+}
+.elowen-title {
+  font-size: 13px;
+  font-family: serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #4a382c;
+}
+.elowen-date {
+  font-size: 6.5px;
+  color: #7d6554;
+  letter-spacing: 0.06em;
+}
+
+/* 8. Amorette (Delicate white sketch frame) */
+.wvisual-amorette {
+  background: #ffffff;
+  color: #2c2d27;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.amorette-card {
+  width: 92%;
+  height: 90%;
+  border: 1px solid #d4c5b3;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.amorette-info {
+  display: flex;
+  flex-direction: column;
+}
+.amorette-eyebrow {
+  font-size: 6.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9c8975;
+}
+.amorette-names {
+  font-size: 13px;
+  font-family: serif;
+  font-weight: 600;
+  color: #2c2d27;
+  margin: 3px 0;
+}
+.amorette-sketch-box {
+  width: 65px;
+  height: 75px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.amorette-sketch-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(30%) contrast(110%);
+}
+
+/* 9. Arbor (Rustic barn fairy lights) */
+.wvisual-arbor {
+  position: relative;
+  overflow: hidden;
+  background: #2b1f14;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+}
+.arbor-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7) contrast(115%);
+}
+.arbor-content {
+  position: relative;
+  z-index: 2;
+}
+.arbor-headline {
+  font-size: 15px;
+  font-family: serif;
+  color: #ffffff;
+  font-style: italic;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+.arbor-sub {
+  font-size: 7.5px;
+  color: #ffd699;
+  letter-spacing: 0.08em;
+}
+
+/* 10. Everty (Elena & Mateo moody Tuscany) */
+.wvisual-everty {
+  position: relative;
+  overflow: hidden;
+  background: #181c16;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 16px;
+}
+.everty-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+.everty-content {
+  position: relative;
+  z-index: 2;
+}
+.everty-names {
+  font-size: 17px;
+  font-family: serif;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+}
+.everty-loc {
+  font-size: 8px;
+  color: #d1b48c;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+/* 11. Mira Nirvana (Emerald African royalty) */
+.wvisual-miranirvana {
+  position: relative;
+  overflow: hidden;
+  background: #0d1a14;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+}
+.miranirvana-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.75);
+}
+.miranirvana-title {
+  position: relative;
+  z-index: 2;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+.miranirvana-tag {
+  position: relative;
+  z-index: 2;
+  font-size: 7.5px;
+  color: #a7e2b7;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* 12. Wedfully (Sofia & Mateo Lake Como balustrade) */
+.wvisual-wedfully {
+  position: relative;
+  overflow: hidden;
+  background: #1a2a36;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wedfully-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wedfully-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  padding: 12px 18px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+.wedfully-names {
+  font-size: 16px;
+  font-family: serif;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.wedfully-sub {
+  font-size: 7px;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.08em;
+}
+
+/* 13. Detail Day / Planner */
+.wvisual-detailday {
+  background: #fdfaf6;
+  color: #1a1a1a;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.detailday-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #2b2520;
+  margin-top: 4px;
+}
+.detailday-photos {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0;
+}
+.detailday-photo-item {
+  width: 48px;
+  height: 52px;
+  border-radius: 4px;
+  object-fit: cover;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* 14. Nala & Us (Playful retro wedding with pet) */
+.wvisual-nalaparty {
+  background: #88a7c2;
+  color: #ffffff;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.nalaparty-banner {
+  background: #f9d2ce;
+  color: #733c3a;
+  font-size: 8px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+.nalaparty-pet-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  overflow: hidden;
+  margin: 4px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.nalaparty-pet-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.nalaparty-sub {
+  font-size: 7px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 15. Kekasih & Kusuma (Maroon & gold cultural arch) */
+.wvisual-kekasihkusuma {
+  background: #4a1525;
+  color: #f7e1b5;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.kekasih-circle-frame {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 2px solid #d4af37;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+.kekasih-circle-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.kekasih-info {
+  text-align: right;
+}
+.kekasih-names {
+  font-size: 13px;
+  font-family: serif;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+}
+.kekasih-sub {
+  font-size: 7px;
+  color: #f7e1b5;
+  margin-top: 2px;
+}
+
+/* 16. Emily & James (Wine / plum polaroid constellation) */
+.wvisual-emilyjames {
+  background: #471d2b;
+  color: #ffffff;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.emilyjames-quote {
+  font-size: 7px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-top: 4px;
+}
+.emilyjames-names {
+  font-size: 17px;
+  font-family: serif;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+.emilyjames-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin: 6px 0;
+}
+.emilyjames-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+

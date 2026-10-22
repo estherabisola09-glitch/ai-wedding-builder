@@ -4,6 +4,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AuthLayout from "./components/AuthLayout";
 import "./styles/flow.css";
 import Dashboard from "./pages/Dashboard";
+import Templates from "./pages/Templates";
 import {
   Builder,
   DomainSetup,
@@ -20,13 +21,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/templates" element={<Templates />} />
           <Route path="/signup" element={<AuthLayout />} />
           <Route path="/login" element={<AuthLayout />} />
           <Route path="/sites/:slug" element={<GuestSite />} />
-          <Route
-            path="/intake"
-            element={<ProtectedRoute><Intake /></ProtectedRoute>}
-          />
+          <Route path="/intake" element={<Intake />} />
           <Route
             path="/generating"
             element={
