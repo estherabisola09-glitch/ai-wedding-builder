@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.vi-app-shell.dark, .vi-app-shell.dark *, .vi-app-shell[data-theme="dark"], .vi-app-shell[data-theme="dark"] *));
 
 @theme {
   --font-sans: "Lexend", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -39,6 +40,51 @@
   /* Easing */
   --ease-sylva: cubic-bezier(.22, .61, .36, 1);
   --ease-sylva-out: cubic-bezier(.16, 1, .3, 1);
+
+  /* Velvet Invite Redesign Tokens (vi- prefixed to protect existing pages & templates) */
+  --font-vi-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
+  --color-vi-forest-950: #141A13;
+  --color-vi-forest-900: #1E271D;
+  --color-vi-forest-850: #232D22;
+  --color-vi-forest-800: #283427;
+  --color-vi-forest-700: #344333;
+  --color-vi-forest-600: #475A45;
+
+  --color-vi-ivory-50: #FFFFFF;
+  --color-vi-ivory-100: #FAF8F5;
+  --color-vi-ivory-150: #F5F0E8;
+  --color-vi-ivory-200: #EFE9DE;
+  --color-vi-ivory-300: #E5DCCE;
+  --color-vi-ivory-400: #D5CBB9;
+
+  --color-vi-champagne-100: #FAF4E8;
+  --color-vi-champagne-200: #F3E5C8;
+  --color-vi-champagne-300: #E7D3A6;
+  --color-vi-champagne-400: #D8BC81;
+  --color-vi-champagne-500: #C9A96A;
+  --color-vi-champagne-600: #B08E4F;
+  --color-vi-champagne-700: #8E6E36;
+
+  --color-vi-velvet-500: #8B263B;
+  --color-vi-velvet-600: #6E1F2F;
+  --color-vi-velvet-700: #551623;
+  --color-vi-velvet-800: #3D0E18;
+
+  --color-vi-ink-950: #0F100E;
+  --color-vi-ink-900: #171815;
+  --color-vi-ink-800: #2A2C27;
+  --color-vi-ink-700: #42453E;
+  --color-vi-ink-600: #5D6158;
+  --color-vi-ink-500: #7B8074;
+  --color-vi-ink-400: #9EA396;
+
+  --shadow-vi-soft: 0 10px 30px -10px rgba(23, 24, 21, 0.08);
+  --shadow-vi-elevated: 0 25px 60px -15px rgba(23, 24, 21, 0.15), 0 0 0 1px rgba(201, 169, 106, 0.15);
+  --shadow-vi-gold-glow: 0 0 25px rgba(201, 169, 106, 0.25);
+
+  --radius-4xl: 2rem;
+  --radius-5xl: 2.5rem;
 }
 
 @font-face {
@@ -393,4 +439,108 @@ textarea:focus-visible {
   .scroll-track-trickle::after {
     animation: none !important;
   }
+}
+
+/* ── Velvet Invite Redesign Shell (Scoped — Light Mode Only for Step 1) ── */
+.vi-app-shell {
+  --vi-nav-h: 64px;
+  --vi-nav-pad-top: 12px;
+  --vi-nav-row-h: 52px;
+  --vi-nav-radius: 12px;
+  --vi-nav-gap: 4px;
+  --vi-page-bg: #FFFFFF;
+  --vi-nav-hairline: rgba(23, 24, 21, 0.12);
+  --vi-nav-hover: rgba(23, 24, 21, 0.05);
+  --vi-nav-muted: #5D6158;
+  --vi-nav-active-text: #171815;
+  --vi-surface: #FFFFFF;
+  --vi-surface-subtle: #F5F0E8;
+  --vi-border: rgba(201, 169, 106, 0.25);
+  --vi-text-primary: #171815;
+  --vi-text-secondary: #5D6158;
+
+  font-family: var(--font-vi-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  color: var(--vi-text-primary);
+  background-color: var(--vi-page-bg);
+}
+
+.vi-app-shell.dark,
+.vi-app-shell[data-theme="dark"] {
+  --vi-page-bg: #141A13;
+  --vi-nav-hairline: rgba(250, 248, 245, 0.14);
+  --vi-nav-hover: rgba(250, 248, 245, 0.07);
+  --vi-nav-muted: #9EA396;
+  --vi-nav-active-text: #FAF8F5;
+  --vi-surface: #1E271D;
+  --vi-surface-subtle: #283427;
+  --vi-border: rgba(201, 169, 106, 0.25);
+  --vi-text-primary: #FAF8F5;
+  --vi-text-secondary: #C5CCC1;
+}
+
+.vi-app-shell h1,
+.vi-app-shell h2,
+.vi-app-shell h3,
+.vi-app-shell h4,
+.vi-app-shell h5,
+.vi-app-shell h6,
+.vi-app-shell button,
+.vi-app-shell input,
+.vi-app-shell textarea,
+.vi-app-shell select {
+  font-family: var(--font-vi-sans);
+}
+
+.vi-app-shell .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.vi-app-shell .no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes vi-marquee-ltr {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0%, 0, 0); }
+}
+
+@keyframes vi-marquee-rtl {
+  0% { transform: translate3d(0%, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.vi-app-shell .animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: vi-marquee-ltr 38s linear infinite;
+}
+
+.vi-app-shell .animate-marquee-rtl {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: vi-marquee-rtl 44s linear infinite;
+}
+
+.vi-app-shell .pause-hover:hover,
+.vi-app-shell .pause-hover:focus-within {
+  animation-play-state: paused;
+}
+
+@keyframes vi-shimmer-sweep {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(250%) skewX(-20deg); }
+}
+
+.vi-app-shell .animate-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: vi-shimmer-sweep 3.5s ease-in-out infinite;
+  pointer-events: none;
 }
