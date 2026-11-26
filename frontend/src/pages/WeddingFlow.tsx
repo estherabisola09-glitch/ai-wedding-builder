@@ -17,7 +17,11 @@ import {
   Star,
   X,
 } from "lucide-react";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { Puck, Render } from "@measured/puck";
+import { weddingPuckConfig } from "../puck/puck.config";
+import type { WeddingPuckData } from "../puck/types";
+import { getTemplatePreset } from "../templates/templateRegistry";
 import RingHero from "../components/RingHero";
 import {
   emptyWeddingDraft,
@@ -834,7 +838,15 @@ export function Landing() {
 
 export function Intake() {
   const navigate = useNavigate();
-  const [draft, setDraft] = useState<WeddingDraft>(() => getWeddingDraft() ?? emptyWeddingDraft);
+  const [searchParams] = useSearchParams();
+  const templateParam = searchParams.get("template") || searchParams.get("templateId");
+  const [draft, setDraft] = useState<WeddingDraft>(() => {
+    const existing = getWeddingDraft() ?? emptyWeddingDraft;
+    if (templateParam && (!existing.templateId || existing.templateId !== templateParam)) {
+      return { ...existing, templateId: templateParam };
+    }
+    return existing;
+  });
   const [step, setStep] = useState(getIntakeStep);
   const [validationError, setValidationError] = useState("");
 
@@ -856,14 +868,33 @@ export function Intake() {
       setStep(1);
       return;
     }
-    saveWeddingDraft(draft);
     if (step < 3) {
+      saveWeddingDraft(draft);
       const nextStep = step + 1;
       saveIntakeStep(nextStep);
       setStep(nextStep);
       return;
     }
-    saveWeddingDraft({ ...draft, intakeComplete: true });
+
+    // Step 3 finished: seed Puck data from the selected template preset
+    const chosenTemplate = draft.templateId || templateParam || "manor-heirloom";
+    const seededPuck = getTemplatePreset(chosenTemplate, {
+      coupleNames: draft.coupleNames,
+      weddingDate: draft.weddingDate,
+      venue: draft.venue,
+      city: draft.city,
+      story: draft.story,
+    });
+
+    const finalDraft: WeddingDraft = {
+      ...draft,
+      templateId: chosenTemplate,
+      puckData: seededPuck,
+      intakeComplete: true,
+    };
+
+    setDraft(finalDraft);
+    saveWeddingDraft(finalDraft);
     saveIntakeStep(3);
     navigate("/generating");
   };
@@ -962,7 +993,12 @@ export function Intake() {
         <aside className="intake-aside">
           <span className="eyebrow"><Sparkles size={13} /> LIVE INVITATION PREVIEW</span>
           <div className="intake-preview-stage">
-            <WeddingCard draft={draft} showKnob={false} />
+            {draft.puckData ? (
+              <Render config={weddingPuckConfig} data={draft.puckData} />
+            ) : (
+              <WeddingCard draft={draft} showKnob={false} />
+            )}
+
           </div>
           <p className="intake-aside-hint">Your details are saved as you go. You can return and finish whenever you're ready.</p>
         </aside>
@@ -977,6 +1013,19 @@ export function GeneratedDraft() {
 
   useEffect(() => {
     if (!draft?.intakeComplete) return;
+
+    if (!draft.puckData) {
+      const chosenTemplate = draft.templateId || "manor-heirloom";
+      const preset = getTemplatePreset(chosenTemplate, {
+        coupleNames: draft.coupleNames,
+        weddingDate: draft.weddingDate,
+        venue: draft.venue,
+        city: draft.city,
+        story: draft.story,
+      });
+      saveWeddingDraft({ ...draft, puckData: preset });
+    }
+
     const timer = window.setTimeout(() => navigate("/builder", { replace: true }), 2200);
     return () => window.clearTimeout(timer);
   }, [draft, navigate]);
@@ -1014,28 +1063,113 @@ export function GeneratedDraft() {
 
 export function Builder() {
   const navigate = useNavigate();
-  const [draft, setDraft] = useState<WeddingDraft | null>(() => getWeddingDraft());
+  const [searchParams] = useSearchParams();
+  const urlTemplate = searchParams.get("template");
+  const [draft, setDraft] = useState<WeddingDraft>(() => {
+    const existing = getWeddingDraft();
+    if (existing) {
+      if (!existing.puckData) {
+        existing.puckData = getTemplatePreset(existing.templateId || "manor-heirloom", existing);
+        saveWeddingDraft(existing);
+      }
+      // If a template param is present and differs, start a new draft with that template
+      if (urlTemplate && existing.templateId !== urlTemplate) {
+        const fresh: WeddingDraft = {
+          ...emptyWeddingDraft,
+          templateId: urlTemplate,
+          intakeComplete: true,
+        };
+        fresh.puckData = getTemplatePreset(urlTemplate, fresh);
+        saveWeddingDraft(fresh);
+        return fresh;
+      }
+      return existing;
+    }
+    // No existing draft – create a new one using URL template or default
+    const templateId = urlTemplate || "manor-heirloom";
+    const initial: WeddingDraft = {
+      ...emptyWeddingDraft,
+      templateId,
+      intakeComplete: true,
+    };
+    initial.puckData = getTemplatePreset(templateId, initial);
+    saveWeddingDraft(initial);
+    return initial;
+  });
   const [publishError, setPublishError] = useState("");
+  const [editorMode, setEditorMode] = useState<"visual" | "quick">("visual");
+
+  const [puckData, setPuckData] = useState<WeddingPuckData>(() => {
+    if (draft.puckData) return draft.puckData;
+    return getTemplatePreset(draft.templateId || "manor-heirloom", {
+      coupleNames: draft.coupleNames,
+      weddingDate: draft.weddingDate,
+      venue: draft.venue,
+      city: draft.city,
+      story: draft.story,
+    });
+  });
 
   useEffect(() => {
-    if (draft) saveWeddingDraft(draft);
+    saveWeddingDraft(draft);
   }, [draft]);
-
-  if (!draft?.intakeComplete) return <Navigate to="/intake" replace />;
 
   const change = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
-    setDraft((current) => current ? { ...current, [name]: value, status: "draft" } : current);
+    setDraft((current) => ({ ...current, [name]: value, status: "draft" }));
+  };
+
+  const handlePuckChange = (data: WeddingPuckData) => {
+    setPuckData(data);
+    const heroItem = data.content?.find((item) => item.type === "Hero");
+    const heroNames = (heroItem?.props as Record<string, unknown> | undefined)?.coupleNames;
+
+    setDraft((current) => {
+      if (!current) return current;
+      const updated: WeddingDraft = {
+        ...current,
+        coupleNames: typeof heroNames === "string" && heroNames.trim() ? heroNames : current.coupleNames,
+        puckData: data,
+        status: "draft",
+      };
+      saveWeddingDraft(updated);
+      return updated;
+    });
   };
 
   const beginPublish = () => {
-    if (!draft.coupleNames.trim()) {
+    const heroItem = puckData.content?.find((item) => item.type === "Hero");
+    const heroNames = (heroItem?.props as Record<string, unknown> | undefined)?.coupleNames;
+    const effectiveNames = (draft.coupleNames || (typeof heroNames === "string" ? heroNames : "")).trim();
+
+    if (!effectiveNames) {
       setPublishError("Add your names before continuing to publish.");
       return;
     }
     setPublishError("");
-    setDraft((current) => current ? { ...current, status: "draft" } : current);
+    setDraft((current) => {
+      if (!current) return current;
+      const updated: WeddingDraft = {
+        ...current,
+        coupleNames: effectiveNames,
+        puckData,
+        status: "draft",
+      };
+      saveWeddingDraft(updated);
+      return updated;
+    });
     navigate("/domain");
+  };
+
+  const handlePublish = (data: WeddingPuckData) => {
+    setPuckData(data);
+    setDraft((current) => {
+      if (!current) return current;
+      const updated: WeddingDraft = { ...current, puckData: data };
+      saveWeddingDraft(updated);
+      return updated;
+    });
+    beginPublish();
   };
 
   return (
@@ -1059,60 +1193,90 @@ export function Builder() {
         <div>
           <span className="eyebrow"><Sparkles size={13} /> YOUR WEDDING WEBSITE</span>
           <h1>Shape your story</h1>
+          <div className="builder-mode-tabs" style={{ display: "flex", gap: "8px", marginTop: "12px" }}>
+            <button
+              type="button"
+              className={`button button-small ${editorMode === "visual" ? "button-primary" : "button-glass-pill"}`}
+              style={{ borderRadius: "999px", padding: "6px 16px", fontSize: "12px" }}
+              onClick={() => setEditorMode("visual")}
+            >
+              Visual Studio (Puck)
+            </button>
+            <button
+              type="button"
+              className={`button button-small ${editorMode === "quick" ? "button-primary" : "button-glass-pill"}`}
+              style={{ borderRadius: "999px", padding: "6px 16px", fontSize: "12px" }}
+              onClick={() => setEditorMode("quick")}
+            >
+              Quick Details
+            </button>
+          </div>
         </div>
         <button className="button button-primary pill-btn builder-publish-cta" onClick={beginPublish} type="button">
           Continue to publish <ArrowRight size={16} />
         </button>
       </div>
-      <div className="builder-workspace">
-        <section className="builder-editor paper-card">
-          <div className="editor-heading">
-            <span className="editor-icon"><Sparkles size={17} /></span>
-            <div>
-              <h2>Your details</h2>
-              <p>Changes appear in your preview as you type.</p>
+
+      {editorMode === "visual" ? (
+        <div className="puck-studio-container" style={{ width: "min(100%, 1380px)", margin: "0 auto", borderRadius: "16px", overflow: "visible", minHeight: "840px", boxShadow: "0 24px 64px rgba(0,0,0,0.2)" }}>
+          <Puck config={weddingPuckConfig} data={puckData} onChange={handlePuckChange} onPublish={handlePublish} iframe={{ enabled: false }} />
+        </div>
+      ) : (
+        <div className="builder-workspace">
+          <section className="builder-editor paper-card">
+            <div className="editor-heading">
+              <span className="editor-icon"><Sparkles size={17} /></span>
+              <div>
+                <h2>Your details</h2>
+                <p>Changes appear in your preview as you type.</p>
+              </div>
             </div>
-          </div>
-          <label className="field-label" htmlFor="editNames">Names</label>
-          <input id="editNames" className="field-input" name="coupleNames" value={draft.coupleNames} onChange={change} required />
-          <label className="field-label" htmlFor="editDate">Wedding date</label>
-          <input id="editDate" className="field-input" name="weddingDate" type="date" value={draft.weddingDate} onChange={change} />
-          <label className="field-label" htmlFor="editVenue">Venue</label>
-          <input id="editVenue" className="field-input" name="venue" value={draft.venue} onChange={change} placeholder="Add a venue" />
-          <label className="field-label" htmlFor="editCity">Location</label>
-          <input id="editCity" className="field-input" name="city" value={draft.city} onChange={change} placeholder="Add a city" />
-          <label className="field-label" htmlFor="editStory">Your story</label>
-          <textarea id="editStory" className="field-input field-textarea" name="story" value={draft.story} onChange={change} placeholder="A note for your guests" rows={4} />
-          <div className="ai-note">
-            <Sparkles size={15} />
-            <p>AI conversation edits are coming soon. For now, update your details here and watch the preview change.</p>
-          </div>
-          {publishError && <p className="flow-error" role="alert">{publishError}</p>}
-          <button className="button button-primary pill-btn button-full" onClick={beginPublish} type="button">
-            Continue to publish <ArrowRight size={16} />
-          </button>
-        </section>
-        <section className="preview-panel paper-card" aria-label="Live wedding website preview">
-          <div className="preview-toolbar">
-            <span><span className="preview-dot" /> LIVE PREVIEW</span>
-            <span>DESKTOP <i>/</i> MOBILE</span>
-          </div>
-          <div className="preview-canvas">
-            <div className="preview-topline">
-              <span>WITH LOVE</span>
-              <span>{draft.coupleNames ? "SAVE THE DATE" : "OUR WEDDING"}</span>
-              <span>DETAILS</span>
+            <label className="field-label" htmlFor="editNames">Names</label>
+            <input id="editNames" className="field-input" name="coupleNames" value={draft.coupleNames} onChange={change} required />
+            <label className="field-label" htmlFor="editDate">Wedding date</label>
+            <input id="editDate" className="field-input" name="weddingDate" type="date" value={draft.weddingDate} onChange={change} />
+            <label className="field-label" htmlFor="editVenue">Venue</label>
+            <input id="editVenue" className="field-input" name="venue" value={draft.venue} onChange={change} placeholder="Add a venue" />
+            <label className="field-label" htmlFor="editCity">Location</label>
+            <input id="editCity" className="field-input" name="city" value={draft.city} onChange={change} placeholder="Add a city" />
+            <label className="field-label" htmlFor="editStory">Your story</label>
+            <textarea id="editStory" className="field-input field-textarea" name="story" value={draft.story} onChange={change} placeholder="A note for your guests" rows={4} />
+            <div className="ai-note">
+              <Sparkles size={15} />
+              <p>AI conversation edits are coming soon. For now, update your details here or switch to Visual Studio.</p>
             </div>
-            <WeddingCard draft={draft} showKnob={false} />
-            <div className="preview-below">
-              <span>OUR STORY</span>
-              <h3>A day to remember,<br />a story to share.</h3>
-              <p>{draft.story || "A celebration of love, family, and the beginning of forever."}</p>
+            {publishError && <p className="flow-error" role="alert">{publishError}</p>}
+            <button className="button button-primary pill-btn button-full" onClick={beginPublish} type="button">
+              Continue to publish <ArrowRight size={16} />
+            </button>
+          </section>
+          <section className="preview-panel paper-card" aria-label="Live wedding website preview">
+            <div className="preview-toolbar">
+              <span><span className="preview-dot" /> LIVE PREVIEW</span>
+              <span>DESKTOP <i>/</i> MOBILE</span>
             </div>
-          </div>
-          <p className="preview-disclaimer">Starter preview • Your site is not published yet</p>
-        </section>
-      </div>
+            <div className="preview-canvas">
+              <div className="preview-topline">
+                <span>WITH LOVE</span>
+                <span>{draft.coupleNames ? "SAVE THE DATE" : "OUR WEDDING"}</span>
+                <span>DETAILS</span>
+              </div>
+              {draft.puckData ? (
+                <Render config={weddingPuckConfig} data={draft.puckData} />
+              ) : (
+                <WeddingCard draft={draft} showKnob={false} />
+              )}
+
+              <div className="preview-below">
+                <span>OUR STORY</span>
+                <h3>A day to remember,<br />a story to share.</h3>
+                <p>{draft.story || "A celebration of love, family, and the beginning of forever."}</p>
+              </div>
+            </div>
+            <p className="preview-disclaimer">Starter preview • Your site is not published yet</p>
+          </section>
+        </div>
+      )}
     </main>
   );
 }
@@ -1253,6 +1417,21 @@ export function GuestSite() {
             Back to Velvet Invite <ArrowRight size={16} />
           </Link>
         </div>
+      </main>
+    );
+  }
+
+  if (draft.puckData) {
+    return (
+      <main className="guest-page guest-puck-page">
+        <header className="guest-header">
+          <Brand />
+          <span className="guest-header-pill">YOU'RE INVITED</span>
+        </header>
+        <div className="guest-puck-content">
+          <Render config={weddingPuckConfig} data={draft.puckData} />
+        </div>
+        <footer className="guest-footer">MADE WITH LOVE • VELVET INVITE</footer>
       </main>
     );
   }

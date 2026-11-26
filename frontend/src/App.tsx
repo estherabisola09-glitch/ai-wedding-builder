@@ -26,22 +26,8 @@ function App() {
           <Route path="/login" element={<AuthLayout />} />
           <Route path="/sites/:slug" element={<GuestSite />} />
           <Route path="/intake" element={<Intake />} />
-          <Route
-            path="/generating"
-            element={
-              <ProtectedRoute>
-                <GeneratedDraft />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/builder"
-            element={
-              <ProtectedRoute>
-                <Builder />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/generating" element={<GeneratedDraft />} />
+          <Route path="/builder" element={<Builder />} />1
           <Route
             path="/domain"
             element={

@@ -1,4 +1,7 @@
+import type { WeddingPuckData } from "./puck/types";
+
 export interface WeddingDraft {
+  templateId: string;
   coupleNames: string;
   weddingDate: string;
   venue: string;
@@ -8,6 +11,7 @@ export interface WeddingDraft {
   slug: string;
   status: "draft" | "published";
   intakeComplete: boolean;
+  puckData?: WeddingPuckData;
 }
 
 const STORAGE_KEY = "velvet-invite-wedding-draft";
@@ -18,6 +22,7 @@ type StoredWeddingDraft = Omit<WeddingDraft, "intakeComplete"> & {
 };
 
 export const emptyWeddingDraft: WeddingDraft = {
+  templateId: "",
   coupleNames: "",
   weddingDate: "",
   venue: "",

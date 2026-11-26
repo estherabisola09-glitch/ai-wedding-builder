@@ -619,7 +619,7 @@ export default function Templates() {
   }, [selectedMainCategory, selectedSubItem, priceFilter, searchQuery, activeTab]);
 
   const handleUseTemplate = (template: WeddingTemplateItem) => {
-    navigate(`/intake?template=${encodeURIComponent(template.name)}`);
+    navigate(`/intake?template=${encodeURIComponent(template.id)}&templateName=${encodeURIComponent(template.name)}`);
   };
 
   const renderVisual = (visualKey: string) => {
@@ -1034,7 +1034,7 @@ export default function Templates() {
             <Link to="/login" className="templates-nav-link">
               Log in
             </Link>
-            <Link to="/intake" className="templates-cta-pill">
+            <Link to="/builder" className="templates-cta-pill">
               Start building free <ChevronRight size={14} />
             </Link>
           </nav>
