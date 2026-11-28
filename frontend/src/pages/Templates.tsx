@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import { Brand } from "./WeddingFlow";
 import "../styles/templates.css";
-import { DesignerShell } from "../components/DesignerShell";
 
 export type WeddingCategory =
   | "Classic & elegant"

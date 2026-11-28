@@ -3,20 +3,17 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   Compass,
   LayoutTemplate,
-  LogIn,
   Menu,
   Moon,
   Sparkles,
   Sun,
   Tag,
-  User as UserIcon,
   X,
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { PRIMARY_NAV_ITEMS } from '../data/navigation';
-import { getWeddingDraft } from '../weddingDraft';
 
 export const DesignerNavbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,9 +22,6 @@ export const DesignerNavbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
-
-  const draft = getWeddingDraft();
-  const accountLabel = draft?.coupleNames?.split('&')[0]?.trim() || 'Dashboard';
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
